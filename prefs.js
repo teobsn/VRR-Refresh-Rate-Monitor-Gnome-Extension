@@ -63,31 +63,56 @@ export default class VRRMonitorPreferences extends ExtensionPreferences {
         // --- Min Hz ---
         const minHzRow = new Adw.ActionRow({
             title: 'Minimum Hz',
-            subtitle: 'The floor value for VRR detection (usually 30 or 48)'
+            subtitle: 'The floor value for VRR detection'
+        });
+
+        const minHzBox = new Gtk.Box({
+            orientation: Gtk.Orientation.HORIZONTAL,
+            spacing: 12,
+            valign: Gtk.Align.CENTER
+        });
+
+        const minHzAdjustment = new Gtk.Adjustment({
+            lower: 1,
+            upper: 60,
+            step_increment: 1,
+            page_increment: 5
         });
 
         const minHzScale = new Gtk.Scale({
             orientation: Gtk.Orientation.HORIZONTAL,
-            adjustment: new Gtk.Adjustment({
-                lower: 1,
-                upper: 60,
-                step_increment: 1,
-                page_increment: 5
-            }),
-            draw_value: true,
-            value_pos: Gtk.PositionType.LEFT,
+            adjustment: minHzAdjustment,
+            draw_value: false,
             hexpand: true,
-            vexpand: true
+            width_request: 150
+        });
+
+        // Add marks for common VRR minimums
+        minHzScale.add_mark(24, Gtk.PositionType.BOTTOM, '24');
+        minHzScale.add_mark(30, Gtk.PositionType.BOTTOM, '30');
+        minHzScale.add_mark(40, Gtk.PositionType.BOTTOM, '40');
+        minHzScale.add_mark(48, Gtk.PositionType.BOTTOM, '48');
+        minHzScale.add_mark(60, Gtk.PositionType.BOTTOM, '60');
+
+        const minHzSpin = new Gtk.SpinButton({
+            adjustment: minHzAdjustment,
+            climb_rate: 1,
+            digits: 0,
+            numeric: true,
+            valign: Gtk.Align.CENTER
         });
 
         settings.bind(
             'min-hz',
-            minHzScale.get_adjustment(),
+            minHzAdjustment,
             'value',
             Gio.SettingsBindFlags.DEFAULT
         );
 
-        minHzRow.add_suffix(minHzScale);
+        minHzBox.append(minHzScale);
+        minHzBox.append(minHzSpin);
+
+        minHzRow.add_suffix(minHzBox);
         group.add(minHzRow);
 
         // --- Graph Color ---
