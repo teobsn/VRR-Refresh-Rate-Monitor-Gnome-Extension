@@ -5,7 +5,6 @@ A simple GNOME Shell extension that displays the current refresh rate (Hz) on th
 ## Compatibility
 | GNOME Version | Status |
 |---|---|
-| 46 | ❌ Not Compatible |
 | 47 | ❌ Not Compatible |
 | 48 | ✅ Compatible |
 | 49 | ✅ Compatible |
