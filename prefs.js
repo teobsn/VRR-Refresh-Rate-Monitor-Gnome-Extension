@@ -119,20 +119,23 @@ export default class VRRMonitorPreferences extends ExtensionPreferences {
         group.add(textColorRow);
 
 
-        // --- Show FPS Text ---
-        const textRow = new Adw.SwitchRow({
-            title: 'Show "Hz" Label',
-            subtitle: 'Toggle the unit text beside the number'
+        // --- Unit Display Mode ---
+        const unitRow = new Adw.ComboRow({
+            title: 'Unit Label',
+            subtitle: 'Choose the text suffix',
+            model: new Gtk.StringList({
+                strings: ['Hz', 'FPS', 'Disabled']
+            })
         });
 
         settings.bind(
-            'show-fps-text',
-            textRow,
-            'active',
+            'unit-display-mode',
+            unitRow,
+            'selected',
             Gio.SettingsBindFlags.DEFAULT
         );
 
-        group.add(textRow);
+        group.add(unitRow);
         page.add(group);
         window.add(page);
     }

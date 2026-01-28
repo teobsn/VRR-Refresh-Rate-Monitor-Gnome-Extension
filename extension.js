@@ -176,7 +176,7 @@ const RefreshRateIndicator = GObject.registerClass(
 
         _onSettingsChanged() {
             this._graphColor = this._settings.get_string('graph-color');
-            this._showFpsText = this._settings.get_boolean('show-fps-text');
+            this._unitDisplayMode = this._settings.get_int('unit-display-mode');
             this._textColor = this._settings.get_string('text-color');
 
             const graphWidth = this._settings.get_int('graph-width');
@@ -187,10 +187,18 @@ const RefreshRateIndicator = GObject.registerClass(
         }
 
         _updateLabel() {
-            if (this._showFpsText) {
-                this._label.set_text(`${Math.round(this._currentHz)} Hz`);
-            } else {
-                this._label.set_text(`${Math.round(this._currentHz)}`);
+            const val = Math.round(this._currentHz);
+            switch (this._unitDisplayMode) {
+                case 1: // FPS
+                    this._label.set_text(`${val} FPS`);
+                    break;
+                case 2: // Disabled
+                    this._label.set_text(`${val}`);
+                    break;
+                case 0: // Hz
+                default:
+                    this._label.set_text(`${val} Hz`);
+                    break;
             }
 
             if (this._textColor) {

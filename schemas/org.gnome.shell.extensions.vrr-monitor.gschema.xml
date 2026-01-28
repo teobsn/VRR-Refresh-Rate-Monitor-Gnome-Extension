@@ -6,10 +6,10 @@
       <summary>Graph Color</summary>
       <description>Color of the refresh rate graph line.</description>
     </key>
-    <key name="show-fps-text" type="b">
-      <default>true</default>
-      <summary>Show FPS Text</summary>
-      <description>Whether to show the "FPS" or "Hz" suffix next to the number.</description>
+    <key name="unit-display-mode" type="i">
+      <default>0</default>
+      <summary>Unit Display Mode</summary>
+      <description>0=Hz, 1=FPS, 2=Disabled (Number only).</description>
     </key>
     <key name="graph-width" type="i">
       <default>100</default>
