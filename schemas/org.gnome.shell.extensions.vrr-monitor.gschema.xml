@@ -26,5 +26,10 @@
       <summary>Minimum Hz</summary>
       <description>The minimum refresh rate floor for the VRR display.</description>
     </key>
+    <key name="show-graph" type="b">
+      <default>true</default>
+      <summary>Show Graph</summary>
+      <description>Toggle visibility of the refresh rate graph.</description>
+    </key>
   </schema>
 </schemalist>

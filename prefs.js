@@ -29,6 +29,21 @@ export default class VRRMonitorPreferences extends ExtensionPreferences {
             return destRgba;
         };
 
+        // --- Show Graph ---
+        const showGraphRow = new Adw.SwitchRow({
+            title: 'Show Graph',
+            subtitle: 'Toggle visibility of the refresh rate graph'
+        });
+
+        settings.bind(
+            'show-graph',
+            showGraphRow,
+            'active',
+            Gio.SettingsBindFlags.DEFAULT
+        );
+
+        group.add(showGraphRow);
+
         // --- Graph Width (Scale) ---
         const widthRow = new Adw.ActionRow({
             title: 'Graph Width',

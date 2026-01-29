@@ -201,9 +201,12 @@ const RefreshRateIndicator = GObject.registerClass(
             this._graphColor = this._settings.get_string('graph-color');
             this._unitDisplayMode = this._settings.get_int('unit-display-mode');
             this._textColor = this._settings.get_string('text-color');
+            const showGraph = this._settings.get_boolean('show-graph');
 
             const graphWidth = this._settings.get_int('graph-width');
-            this._drawingArea.set_width(graphWidth);
+            this._drawingArea.set_width(showGraph ? graphWidth : 0);
+            this._drawingArea.set_height(showGraph ? GRAPH_HEIGHT : 0);
+            this._drawingArea.visible = showGraph;
 
             this._updateLabel();
             this._drawingArea.queue_repaint();
