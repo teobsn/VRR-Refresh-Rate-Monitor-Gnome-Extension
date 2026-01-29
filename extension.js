@@ -131,7 +131,8 @@ const RefreshRateIndicator = GObject.registerClass(
             if (monitorManager && typeof monitorManager.get_logical_monitors === 'function') {
                 let logical = monitorManager.get_logical_monitors();
                 for (let l of logical) {
-                    if (l.is_primary()) {
+                    const isPrimary = typeof l.is_primary === 'function' ? l.is_primary() : l.is_primary;
+                    if (isPrimary) {
                         let m = l.get_monitors()[0];
                         if (m) {
                             let mode = m.get_current_mode();
