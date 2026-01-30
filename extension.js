@@ -216,7 +216,13 @@ const RefreshRateIndicator = GObject.registerClass(
         }
 
         _updateLabel() {
-            const val = Math.round(this._currentHz);
+            // Pad the value of the FPS so that the space
+            // occupied by the extension remains constant
+            let val = Math.round(this._currentHz).toString();
+
+            const len_max_hz = Math.round(this._maxHz).toString().length;
+            val = val.padStart(len_max_hz)
+            
             switch (this._unitDisplayMode) {
                 case 1: // FPS
                     this._label.set_text(`${val} FPS`);
