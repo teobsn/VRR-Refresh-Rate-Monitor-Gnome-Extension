@@ -260,11 +260,14 @@ const RefreshRateIndicator = GObject.registerClass(
             const maxScale = Math.max(this._maxHz, 60);
             const stepX = width / (HISTORY_SIZE - 1);
 
+            const padding = 6;
+            const graphHeight = height - padding;
+
             cr.moveTo(0, height);
 
             for (let i = 0; i < HISTORY_SIZE; i++) {
                 const hz = this._history[i];
-                const y = height - (Math.min(hz, maxScale) / maxScale) * height;
+                const y = height - (Math.min(hz, maxScale) / maxScale) * graphHeight;
                 if (i === 0) {
                     cr.moveTo(0, y);
                 } else {
