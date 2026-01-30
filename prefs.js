@@ -58,6 +58,7 @@ export default class VRRMonitorPreferences extends ExtensionPreferences {
                 step_increment: 10,
                 page_increment: 50
             }),
+            digits: 0,
             draw_value: true,
             value_pos: Gtk.PositionType.LEFT,
             hexpand: true,
