@@ -236,6 +236,10 @@ const RefreshRateIndicator = GObject.registerClass(
         }
 
         _onRepaint(area) {
+            // No need to redraw graph if it is not shown
+            if(!this._settings.get_boolean('show-graph'))
+                return;
+
             let cr = area.get_context();
             const width = area.width;
             const height = area.height;
