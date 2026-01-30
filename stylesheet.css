@@ -1,8 +1,8 @@
 .vrr-monitor-label {
-    margin: 0 5px;
     font-weight: bold;
     font-feature-settings: 'tnum';
     color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
     /* Keep white text for visibility on dark header */
 }
 
@@ -10,7 +10,4 @@
     margin: 2px 0;
 }
 
-.vrr-graph {
-    margin: 0 5px;
-    /* Removed debug red background */
-}
+/* Removed debug red background */

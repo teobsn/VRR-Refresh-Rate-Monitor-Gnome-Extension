@@ -26,9 +26,9 @@ const RefreshRateIndicator = GObject.registerClass(
             this._history = new Array(HISTORY_SIZE).fill(0);
             this._currentHz = 0;
 
-            let box = new St.BoxLayout({
+            let container = new St.Widget({
+                layout_manager: new Clutter.BinLayout(),
                 style_class: 'vrr-panel-box',
-                vertical: false,
                 x_expand: false,
                 y_expand: false
             });
@@ -37,21 +37,24 @@ const RefreshRateIndicator = GObject.registerClass(
                 style_class: 'vrr-graph',
                 width: this._settings.get_int('graph-width'),
                 height: GRAPH_HEIGHT,
-                x_expand: false,
-                y_expand: false
+                x_expand: true,
+                y_expand: true
             });
             this._drawingArea.connect('repaint', this._onRepaint.bind(this));
 
             this._label = new St.Label({
                 text: 'Init...',
+                x_align: Clutter.ActorAlign.CENTER,
                 y_align: Clutter.ActorAlign.CENTER,
+                x_expand: true,
+                y_expand: true,
                 style_class: 'vrr-monitor-label'
             });
 
-            box.add_child(this._drawingArea);
-            box.add_child(this._label);
+            container.add_child(this._drawingArea);
+            container.add_child(this._label);
 
-            this.add_child(box);
+            this.add_child(container);
 
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             const settingsItem = new PopupMenu.PopupMenuItem('Settings');
@@ -251,7 +254,7 @@ const RefreshRateIndicator = GObject.registerClass(
                 }
             }
 
-            cr.setSourceRGB(r, g, b);
+            cr.setSourceRGBA(r, g, b, 0.5);
             cr.setLineWidth(1.5);
 
             const maxScale = Math.max(this._maxHz, 60);
