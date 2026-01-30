@@ -267,7 +267,9 @@ const RefreshRateIndicator = GObject.registerClass(
             cr.setSourceRGBA(r, g, b, 0.5);
             cr.setLineWidth(1.5);
 
-            const maxScale = Math.max(this._maxHz, 60);
+            // Update maxScale dynamically (normalize graph)
+            const maxScale = Math.max.apply(null, this._history)
+
             const stepX = width / (HISTORY_SIZE - 1);
 
             const padding = 6;
